@@ -3,172 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bailiff Advice </title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Bailiff Advice Request Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(to right, #2c3e50, #4a6491);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-note {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        .response-message {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+            background-color: #f9f9f9;
+        }
+        
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+            
+            header {
+                padding: 20px;
+            }
+            
+            header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="index.html" class="logo">BailiffAdvice</a>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="#services">Services</a>
-                <a href="#advice">Advice</a>
-                <a href="contact.html">Contact</a>
-                <a href="terms.html">Terms</a>
-                <a href="privacy.html">Privacy</a>
-            </div>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="container">
-            <h1>Expert Bailiff Advice & Debt Support</h1>
-            <p>Get professional help dealing with bailiffs, debt collectors, and enforcement agents</p>
-            <a href="#contact-form" class="btn-primary">Get Free Advice</a>
-        </div>
-    </header>
-
-    <!-- Contact Form Section -->
-    <section class="contact-form-section" id="contact-form">
-        <div class="container">
-            <h2>Get Free Bailiff Advice</h2>
-            <p class="section-subtitle">Fill out the form below and we'll send advice to your email</p>
+    <div class="container">
+        <header>
+            <h1>Bailiff Advice Request Form</h1>
+            <p>Submit your details and we'll provide guidance on dealing with bailiff matters</p>
+        </header>
+        
+        <div class="form-container">
+            <div id="responseMessage" class="response-message"></div>
             
-            <form id="adviceForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="fullName">Full Name *</label>
-                        <input type="text" id="fullName" name="fullName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="phone">Phone Number *</label>
-                        <input type="tel" id="phone" name="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="postcode">Postcode *</label>
-                        <input type="text" id="postcode" name="postcode" required>
-                    </div>
+            <form id="bailiffForm" method="POST" action="send_email.php">
+                <div class="form-group">
+                    <label for="name" class="required">Full Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
                 </div>
                 
                 <div class="form-group">
-                    <label for="debtType">Type of Debt *</label>
-                    <select id="debtType" name="debtType" required>
-                        <option value="">Select debt type</option>
-                        <option value="council-tax">Council Tax</option>
-                        <option value="parking-fines">Parking Fines</option>
-                        <option value="ccj">CCJ (County Court Judgment)</option>
-                        <option value="benefit-overpayment">Benefit Overpayment</option>
-                        <option value="child-maintenance">Child Maintenance</option>
-                        <option value="other">Other</option>
-                    </select>
+                    <label for="phone" class="required">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Enter your contact number">
                 </div>
                 
                 <div class="form-group">
-                    <label for="debtAmount">Approximate Debt Amount *</label>
-                    <select id="debtAmount" name="debtAmount" required>
-                        <option value="">Select amount</option>
-                        <option value="under-500">Under £500</option>
-                        <option value="500-1000">£500 - £1,000</option>
-                        <option value="1000-5000">£1,000 - £5,000</option>
-                        <option value="5000-10000">£5,000 - £10,000</option>
-                        <option value="over-10000">Over £10,000</option>
-                    </select>
+                    <label for="email" class="required">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email address">
                 </div>
                 
                 <div class="form-group">
-                    <label for="bailiffCompany">Bailiff/Enforcement Company (if known)</label>
-                    <input type="text" id="bailiffCompany" name="bailiffCompany">
+                    <label for="bailiff">Bailiff Information (if known)</label>
+                    <input type="text" id="bailiff" name="bailiff" placeholder="Bailiff company or reference number (if available)">
+                    <p class="form-note">If you know which bailiff company is involved, please provide details here</p>
                 </div>
                 
                 <div class="form-group">
-                    <label for="message">Your Situation *</label>
-                    <textarea id="message" name="message" rows="5" required placeholder="Please describe your situation with bailiffs..."></textarea>
+                    <label for="message">Additional Message (Optional)</label>
+                    <textarea id="message" name="message" placeholder="Please provide any additional details about your situation..."></textarea>
+                    <p class="form-note">Include details about the debt, enforcement action taken, or any specific concerns</p>
                 </div>
                 
-                <div class="form-group checkbox-group">
-                    <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
-                    <label for="agreeTerms">I agree to the <a href="terms.html">Terms & Conditions</a> and <a href="privacy.html">Privacy Policy</a></label>
-                </div>
-                
-                <button type="submit" class="btn-submit">
-                    <i class="fas fa-paper-plane"></i> Send for Free Advice
-                </button>
-                
-                <div id="formMessage" class="form-message"></div>
+                <button type="submit" class="btn">Submit Request for Bailiff Advice</button>
             </form>
         </div>
-    </section>
+        
+        <footer>
+            <p>Your information will be sent to our advice team. We'll respond within 24 hours.</p>
+            <p>Confidential & Secure Form</p>
+        </footer>
+    </div>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <h2>How We Can Help</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-gavel"></i>
-                    <h3>Bailiff Rights</h3>
-                    <p>Understand what bailiffs can and cannot legally do when visiting your property.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-handshake"></i>
-                    <h3>Negotiation Support</h3>
-                    <p>Get help negotiating affordable payment plans with enforcement agents.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-file-contract"></i>
-                    <h3>Document Review</h3>
-                    <p>We'll review bailiff notices and court documents to ensure they're valid.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-balance-scale"></i>
-                    <h3>Court Procedures</h3>
-                    <p>Guidance on challenging bailiff action through court procedures.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>BailiffAdvice</h3>
-                    <p>Providing expert advice on bailiff and enforcement agent matters across the UK.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <a href="index.html">Home</a>
-                    <a href="contact.html">Contact Us</a>
-                    <a href="terms.html">Terms & Conditions</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <p><i class="fas fa-envelope"></i> advice@bailiffadvice.example.com</p>
-                    <p><i class="fas fa-phone"></i> 0800 123 4567</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 BailiffAdvice. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('bailiffForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const responseMessage = document.getElementById('responseMessage');
+            
+            // Show loading state
+            const submitBtn = form.querySelector('.btn');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // Clear previous messages
+            responseMessage.style.display = 'none';
+            responseMessage.className = 'response-message';
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                if(data.includes('success')) {
+                    responseMessage.textContent = 'Thank you! Your bailiff advice request has been sent successfully. We will respond shortly.';
+                    responseMessage.className = 'response-message success';
+                    form.reset();
+                } else {
+                    responseMessage.textContent = 'There was an error sending your message. Please try again or contact us directly.';
+                    responseMessage.className = 'response-message error';
+                }
+                responseMessage.style.display = 'block';
+                
+                // Scroll to message
+                responseMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            })
+            .catch(error => {
+                responseMessage.textContent = 'Network error. Please check your connection and try again.';
+                responseMessage.className = 'response-message error';
+                responseMessage.style.display = 'block';
+                responseMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            })
+            .finally(() => {
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
 </body>
 </html>
